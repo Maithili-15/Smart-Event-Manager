@@ -1,18 +1,23 @@
-# main.py (top)
+# main.py
 from utils.emailer import (
     read_attendees_from_xlsx,
-    get_upcoming_events,
     send_reminders_for_events
 )
 
 from events.manager import add_event, edit_event, delete_event
-from events.views import view_day, view_week, view_month, search_event, filter_event
-from events.views import upcoming_events, sort_events, view_day, view_week, view_month, search_event, filter_event
+from events.views import view_day, view_week, view_month, search_event, filter_event, upcoming_events
 from storage import read_events, write_events
+from utils.auth import Auth
+from utils.analytics import Analytics
 
 from datetime import datetime, timedelta
 
-def get_upcoming_events(events, within_hours=None, specific_date=None):
+
+# --------------------------
+# Helper function
+# --------------------------
+def select_upcoming_events(events, within_hours=None, specific_date=None):
+    """Filter upcoming events based on hours or specific date"""
     now = datetime.now()
     selected = []
 
@@ -34,13 +39,15 @@ def get_upcoming_events(events, within_hours=None, specific_date=None):
     return selected
 
 
+# --------------------------
+# Reminder System (CLI)
+# --------------------------
 def send_reminders_cli():
     print("\n--- Send Reminders ---")
-    # load all events from your existing read_events() function
     try:
-        all_events = read_events()   # assumes read_events() exists in main.py
+        all_events = read_events()
     except NameError:
-        print("read_events() not found in main.py. Make sure your file has read_events() to load events.")
+        print("read_events() not found in storage. Make sure it exists.")
         return
 
     if not all_events:
@@ -56,16 +63,17 @@ def send_reminders_cli():
         except ValueError:
             print("Invalid number.")
             return
-        selected = get_upcoming_events(all_events, within_hours=hours)
+        selected = select_upcoming_events(all_events, within_hours=hours)
+
     elif mode == "date":
         date = input("Enter date (DD-MM-YYYY): ").strip()
-        # basic validation
         try:
             datetime.strptime(date, "%d-%m-%Y")
         except Exception:
-            print("Invalid date.")
+            print("Invalid date format.")
             return
-        selected = get_upcoming_events(all_events, specific_date=date)
+        selected = select_upcoming_events(all_events, specific_date=date)
+
     else:
         print("Invalid option.")
         return
@@ -87,48 +95,114 @@ def send_reminders_cli():
     sent = send_reminders_for_events(selected, attendees, dry_run=dry_run)
     print(f"\nDone. {len(sent)} email entries processed (printed or sent).")
 
+
+# --------------------------
+# Analytics Dashboard
+# --------------------------
+def show_analytics():
+    analytics = Analytics()
+    print("\n📊 Event Analytics Report:")
+    print("➡ Total Events:", analytics.event_count())
+    print("➡ Events by Type:", analytics.events_by_type())
+    print("➡ Events by Location:", analytics.location_stats())
+    print("➡ Top 5 Upcoming Events:", analytics.upcoming_events())
+
+
+# --------------------------
+# Menu
+# --------------------------
 def show_menu():
     print("\n===== Smart Event Manager =====")
-    print("1. Add Event")
-    print("2. Edit Event")
-    print("3. Delete Event")
-    print("4. View Day")
-    print("5. View Week")
-    print("6. View Month")
-    print("7. Search Event")
-    print("8. filter Events")
-    print("9. Upcoming Events")
-    print("10. Send Reminders")
-    print("11. Exit.")
+    print("1. Register")
+    print("2. Login")
+    print("3. Logout")
+    print("4. Add Event")
+    print("5. Edit Event")
+    print("6. Delete Event")
+    print("7. View Day")
+    print("8. View Week")
+    print("9. View Month")
+    print("10. Search Event")
+    print("11. Filter Events")
+    print("12. Upcoming Events")
+    print("13. Send Reminders")
+    print("14. Analytics Report")
+    print("15. Exit")
 
+
+# --------------------------
+# Main Loop
+# --------------------------
 def main():
+    # (Optional Auth System) 
+    # auth = Auth()
+    # if not auth.login():
+    #     print("Authentication failed. Exiting...")
+    #     return
+
     while True:
         show_menu()
         choice = input("Enter choice: ")
 
-        if choice == "1":
-            add_event()
-        elif choice == "2":
-            edit_event()
-        elif choice == "3":
-            delete_event()
+        if choice == "1":  # Register
+            username = input("Enter username: ")
+            password = input("Enter password: ")
+            print(Auth.register(username, password))
+
+        elif choice == "2":  # Login
+            username = input("Enter username: ")
+            password = input("Enter password: ")
+            print(Auth.login(username, password))
+
+        elif choice == "3":  # Logout
+            print(Auth.logout())
+
         elif choice == "4":
-            view_day()
+            if not Auth.logged_in_user:
+                print("⚠️ Please login first!")
+            else:
+                add_event()
+
         elif choice == "5":
-            view_week()
+            if not Auth.logged_in_user:
+                print("⚠️ Please login first!")
+            else:
+                edit_event()
+
         elif choice == "6":
-            view_month()
+            if not Auth.logged_in_user:
+                print("⚠️ Please login first!")
+            else:
+                delete_event()
+
         elif choice == "7":
-            search_event()
+            view_day()
+
         elif choice == "8":
-            filter_event()
+            view_week()
+
         elif choice == "9":
-            upcoming_events()
+            view_month()
+
         elif choice == "10":
-            send_reminders_cli()
+            search_event()
+
         elif choice == "11":
+            filter_event()
+
+        elif choice == "12":
+            upcoming_events()
+
+        elif choice == "13":
+            send_reminders_cli()
+
+        elif choice == "14":
+            show_analytics()
+
+        elif choice == "15":
             print("Exiting... 👋")
             break
+
         else:
             print("❌ Invalid choice. Please try again.")
 
