@@ -72,3 +72,27 @@ def filter_event():
     results = [e for e in events if e.type.lower() == type_filter]
     print(f"\n🔍 Filter results for type '{type_filter}':")
     list_events(results)
+
+def sort_events(events):
+    """Sort events by date and time."""
+    try:
+        return sorted(
+            events,
+            key=lambda e: datetime.strptime(f"{e.date} {e.time}", "%d-%m-%Y %H:%M")
+        )
+    except Exception as ex:
+        print(f"⚠️ Sorting error: {ex}")
+        return events
+
+def upcoming_events(limit=5):
+    events = load_events()
+    if not events:
+        print("❌ No events available.")
+        return
+
+    events = sort_events(events)
+
+    print(f"\n⏳ Next {limit} Upcoming Events:")
+    for e in events[:limit]:
+        print(f"📅 {e.date} ⏰ {e.time} | {e.name} ({e.type})")
+

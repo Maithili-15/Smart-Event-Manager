@@ -6,7 +6,7 @@
         "time": "17:02",
         "type": "sports",
         "location": "playground",
-        "created_at": "17-08-2025 17:23"
+        "created_at": "17-08-2025 17:43"
     },
     {
         "id": "c1ecb276-6f82-4ae3-8967-54b1259bc70c",
@@ -15,7 +15,7 @@
         "time": "6:00",
         "type": "classical",
         "location": "auditorium",
-        "created_at": "17-08-2025 17:23"
+        "created_at": "17-08-2025 17:43"
     },
     {
         "id": "5e337292-d1e9-4c02-b769-3dc56359bc28",
@@ -24,6 +24,15 @@
         "time": "11:00",
         "type": "fireless cooking",
         "location": "5th floor 6th building",
-        "created_at": "17-08-2025 17:24"
+        "created_at": "17-08-2025 17:43"
+    },
+    {
+        "id": "a7e16bb0-8ed9-4f7c-97d2-ead275305b29",
+        "name": "Gaming",
+        "date": "11-11-2025",
+        "time": "5:00",
+        "type": "games",
+        "location": "gaming room 6th floor",
+        "created_at": "17-08-2025 17:44"
     }
 ]
