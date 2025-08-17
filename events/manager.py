@@ -19,30 +19,39 @@ def validate_time(time_str):
 def add_event():
     events = read_events()
 
-    name = input("Enter event name: ")
-    date = input("Enter date (DD-MM-YYYY): ")
+    name = input("Enter event name: ").strip()
+    date = input("Enter date (DD-MM-YYYY): ").strip()
     if not validate_date(date):
         print("❌ Invalid date format!")
         return
 
-    time = input("Enter time (HH:MM): ")
+    time = input("Enter time (HH:MM): ").strip()
     if not validate_time(time):
         print("❌ Invalid time format!")
         return
 
-    type_ = input("Enter event type: ")
-    location = input("Enter location (optional): ")
+    time = datetime.strptime(time, "%H:%M").strftime("%H:%M")
+    date = datetime.strptime(date, "%d-%m-%Y").strftime("%d-%m-%Y")
+    type_ = input("Enter event type: ").strip()
+    location = input("Enter location (optional): ").strip() or "Not specified"
 
-    # Prevent duplicates (same name + date + time)
+    # 🟢 Normalize date & time (convert to datetime objects for comparison)
+    new_dt = datetime.strptime(f"{date} {time}", "%d-%m-%Y %H:%M")
+
     for e in events:
-        if e.name.lower() == name.lower() and e.date == date and e.time == time:
+        existing_dt = datetime.strptime(f"{e.date} {e.time}", "%d-%m-%Y %H:%M")
+
+        if e.name.lower().strip() == name.lower() and existing_dt == new_dt:
             print("⚠️ Duplicate event found! Not adding.")
             return
 
+    # Create new event
     new_event = Event(name, date, time, type_, location)
     events.append(new_event)
     write_events(events)
     print("✅ Event added successfully!")
+
+
 
 def edit_event():
     events = read_events()
