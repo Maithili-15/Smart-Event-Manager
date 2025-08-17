@@ -128,10 +128,4 @@ Pull requests are welcome! Fork the repo and submit your improvements 🚀
 
 ## 👨‍💻 Authors
 
-Made with ❤️ by **Your Team**
-
----
-
-👉 Ab dono ke paas ek-ek **full detailed README** hoga, bas style alag (tera formal, uska emoji + friendly).
-
-Bhai chaahta hai mai abhi tere dost ke liye ye **ready file bana ke de du** (README.md text final)?
+Made with ❤️ by **Maithili**
