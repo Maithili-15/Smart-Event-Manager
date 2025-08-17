@@ -1,12 +1,12 @@
 from datetime import datetime
-import uuid
+import uuid     # universal unique identifier
 
 class Event:
-    def __init__(self, name, date, time, type_, location=None, event_id=None):
+    def __init__(self, name, date, time, type_, location=None, event_id=None):   # ye constructor method h 
         self.id = event_id or str(uuid.uuid4())  # unique ID
-        self.name = name
+        self.name = name   # event ka naam store krega
 
-        # ✅ Normalize date
+        # ✅ Normalize date   (Yahaan program validate karta hai ki date sahi format me hai ya nahi.)
         try:
             parsed_date = datetime.strptime(date, "%d-%m-%Y").strftime("%d-%m-%Y")
         except ValueError:
