@@ -1,0 +1,20 @@
+[
+    {
+        "id": "5619c49f-8fb5-4bf7-a4ef-06780d06849c",
+        "name": "events.json",
+        "date": "17-08-2025",
+        "time": "17:02",
+        "type": "sports",
+        "location": "playground",
+        "created_at": "17-08-2025 17:06"
+    },
+    {
+        "id": "c1ecb276-6f82-4ae3-8967-54b1259bc70c",
+        "name": "Dance",
+        "date": "17-08-2025",
+        "time": "6:00",
+        "type": "classical",
+        "location": "auditorium",
+        "created_at": "17-08-2025 17:06"
+    }
+]

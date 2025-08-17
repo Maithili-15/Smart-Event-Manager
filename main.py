@@ -1,3 +1,5 @@
+from events.manager import add_event, edit_event, delete_event
+
 def main():
     print("🎉 Smart Event Manager CLI starting...")
 
@@ -22,11 +24,11 @@ def main():
         choice = input("Enter choice: ")
 
         if choice == "1":
-            print("👉 Add Event (placeholder)")
+            add_event()
         elif choice == "2":
-            print("👉 Edit Event (placeholder)")
+            edit_event()
         elif choice == "3":
-            print("👉 Delete Event (placeholder)")
+            delete_event()
         elif choice == "4":
             print("👉 Day View (placeholder)")
         elif choice == "5":
