@@ -1,4 +1,5 @@
 from events.manager import add_event, edit_event, delete_event
+from events.views import view_day, view_week, view_month, search_event, filter_event
 
 def main():
     print("🎉 Smart Event Manager CLI starting...")
@@ -11,11 +12,11 @@ def show_menu():
     print("1. Add Event")
     print("2. Edit Event")
     print("3. Delete Event")
-    print("4. View Events (Day View)")
-    print("5. View Events (Today)")
-    print("6. Search Events")
-    print("7. Send Reminders")
-    print("8. Admin Controls")
+    print("4. View Day")
+    print("5. View Week")
+    print("6. View Month")
+    print("7. Search Event")
+    print("8. filter Events")
     print("9. Exit")
 
 def main():
@@ -30,15 +31,15 @@ def main():
         elif choice == "3":
             delete_event()
         elif choice == "4":
-            print("👉 Day View (placeholder)")
+            view_day()
         elif choice == "5":
-            print("👉 Today’s Events (placeholder)")
+            view_week()
         elif choice == "6":
-            print("👉 Search Events (placeholder)")
+            view_month()
         elif choice == "7":
-            print("👉 Send Reminders (placeholder)")
+            search_event()
         elif choice == "8":
-            print("👉 Admin Controls (placeholder)")
+            filter_event()
         elif choice == "9":
             print("Exiting... 👋")
             break
