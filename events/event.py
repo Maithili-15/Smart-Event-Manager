@@ -1,12 +1,28 @@
-from datetime import datetime      
-import uuid  # to generate unique IDs
+from datetime import datetime
+import uuid
 
 class Event:
     def __init__(self, name, date, time, type_, location=None, event_id=None):
         self.id = event_id or str(uuid.uuid4())  # unique ID
         self.name = name
-        self.date = date        # string format: DD-MM-YYYY
-        self.time = time        # string format: HH:MM
+
+        # ✅ Normalize date
+        try:
+            parsed_date = datetime.strptime(date, "%d-%m-%Y").strftime("%d-%m-%Y")
+        except ValueError:
+            parsed_date = date  # fallback if wrong
+        self.date = parsed_date
+
+        # ✅ Normalize time
+        try:
+            parsed_time = datetime.strptime(time, "%H:%M").strftime("%H:%M")
+        except ValueError:
+            try:
+                parsed_time = datetime.strptime(time, "%I:%M").strftime("%H:%M")  # 4:00 -> 04:00
+            except ValueError:
+                parsed_time = time
+        self.time = parsed_time
+
         self.type = type_
         self.location = location or "Not specified"
         self.created_at = datetime.now().strftime("%d-%m-%Y %H:%M")

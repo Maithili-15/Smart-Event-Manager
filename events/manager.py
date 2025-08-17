@@ -1,5 +1,5 @@
 from datetime import datetime
-from storage.json_storage import load_events, save_events
+from storage import read_events, write_events
 from events.event import Event
 
 def validate_date(date_str):
@@ -17,7 +17,7 @@ def validate_time(time_str):
         return False
 
 def add_event():
-    events = load_events()
+    events = read_events()
 
     name = input("Enter event name: ")
     date = input("Enter date (DD-MM-YYYY): ")
@@ -41,11 +41,11 @@ def add_event():
 
     new_event = Event(name, date, time, type_, location)
     events.append(new_event)
-    save_events(events)
+    write_events(events)
     print("✅ Event added successfully!")
 
 def edit_event():
-    events = load_events()
+    events = read_events()
     if not events:
         print("❌ No events to edit.")
         return
@@ -83,11 +83,11 @@ def edit_event():
     found.type = new_type
     found.location = new_location
 
-    save_events(events)
+    write_events(events)
     print("✅ Event updated successfully!")
 
 def delete_event():
-    events = load_events()
+    events = read_events()
     if not events:
         print("❌ No events to delete.")
         return
@@ -98,5 +98,5 @@ def delete_event():
     if len(new_events) == len(events):
         print("❌ Event not found.")
     else:
-        save_events(new_events)
+        write_events(new_events)
         print("✅ Event deleted successfully!")

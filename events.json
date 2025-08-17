@@ -1,38 +1,47 @@
 [
     {
-        "id": "5619c49f-8fb5-4bf7-a4ef-06780d06849c",
-        "name": "events.json",
-        "date": "17-08-2025",
-        "time": "17:02",
-        "type": "sports",
-        "location": "playground",
-        "created_at": "17-08-2025 17:43"
-    },
-    {
-        "id": "c1ecb276-6f82-4ae3-8967-54b1259bc70c",
-        "name": "Dance",
-        "date": "17-08-2025",
-        "time": "6:00",
-        "type": "classical",
-        "location": "auditorium",
-        "created_at": "17-08-2025 17:43"
-    },
-    {
-        "id": "5e337292-d1e9-4c02-b769-3dc56359bc28",
-        "name": "cooking",
+        "id": "8b8901bd-586b-4128-8507-a98e1eb0d798",
+        "name": "1",
         "date": "15-11-2025",
-        "time": "11:00",
-        "type": "fireless cooking",
-        "location": "5th floor 6th building",
-        "created_at": "17-08-2025 17:43"
+        "time": "04:00",
+        "type": "num",
+        "location": "maths",
+        "created_at": "17-08-2025 19:51"
     },
     {
-        "id": "a7e16bb0-8ed9-4f7c-97d2-ead275305b29",
-        "name": "Gaming",
-        "date": "11-11-2025",
-        "time": "5:00",
-        "type": "games",
-        "location": "gaming room 6th floor",
-        "created_at": "17-08-2025 17:44"
+        "id": "f6442be4-c83b-4651-94be-83d3bbb46369",
+        "name": "meeting",
+        "date": "17-08-2025",
+        "time": "19:18",
+        "type": "meet",
+        "location": "Not specified",
+        "created_at": "17-08-2025 19:51"
+    },
+    {
+        "id": "4bfa559a-b3e1-4420-b4b0-0a0039959fd1",
+        "name": "ACM",
+        "date": "17-08-2025",
+        "time": "9:00",
+        "type": "AC",
+        "location": "maths",
+        "created_at": "17-08-2025 19:51"
+    },
+    {
+        "id": "1809275f-d4a0-44b0-b294-892d182c9a32",
+        "name": "ACM",
+        "date": "17-08-2025",
+        "time": "20:00",
+        "type": "Q",
+        "location": "Not specified",
+        "created_at": "17-08-2025 19:51"
+    },
+    {
+        "id": "bfa2883b-c05e-4ba3-bb98-47bfded73cf2",
+        "name": "a",
+        "date": "17-08-2025",
+        "time": "20:00",
+        "type": "q",
+        "location": "Not specified",
+        "created_at": "17-08-2025 19:51"
     }
 ]

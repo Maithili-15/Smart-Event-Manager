@@ -1,7 +1,7 @@
 # events/views.py
 
 from datetime import datetime, timedelta
-from storage.json_storage import load_events
+from storage import read_events
 
 def list_events(events):
     """Helper: Print events in a nice format."""
@@ -20,7 +20,7 @@ Created: {e.created_at}
 """)
 
 def view_day():
-    events = load_events()
+    events = read_events()
     target_date = input("Enter date to view (DD-MM-YYYY): ")
 
     day_events = [e for e in events if e.date == target_date]
@@ -28,7 +28,7 @@ def view_day():
     list_events(day_events)
 
 def view_week():
-    events = load_events()
+    events = read_events()
     start_date = input("Enter week start date (DD-MM-YYYY): ")
     try:
         start_dt = datetime.strptime(start_date, "%d-%m-%Y")
@@ -46,7 +46,7 @@ def view_week():
     list_events(week_events)
 
 def view_month():
-    events = load_events()
+    events = read_events()
     month = input("Enter month (MM): ")
     year = input("Enter year (YYYY): ")
 
@@ -58,7 +58,7 @@ def view_month():
     list_events(month_events)
 
 def search_event():
-    events = load_events()
+    events = read_events()
     keyword = input("Enter keyword to search: ").lower()
 
     results = [e for e in events if keyword in e.name.lower() or keyword in e.type.lower()]
@@ -66,7 +66,7 @@ def search_event():
     list_events(results)
 
 def filter_event():
-    events = load_events()
+    events = read_events()
     type_filter = input("Enter event type to filter (e.g., birthday, meeting): ").lower()
 
     results = [e for e in events if e.type.lower() == type_filter]
@@ -85,7 +85,7 @@ def sort_events(events):
         return events
 
 def upcoming_events(limit=5):
-    events = load_events()
+    events = read_events()
     if not events:
         print("❌ No events available.")
         return
